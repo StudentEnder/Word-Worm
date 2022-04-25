@@ -118,7 +118,7 @@ public static class WordWorm
 
     public static void Main(string[] args)
     {
-        string[] lines = inLinesTostring(); // take standard input
+        string[] lines = InLinesTostring(); // take standard input
 
         TestCase[] testCases = GetTestCases(lines); // parse the input
 
@@ -181,7 +181,7 @@ public static class WordWorm
     }
 
     // standard input: converts System.in input (file) to a string array, where each element is one line in the file.
-    public static string[] inLinesTostring()
+     public static string[] InLinesTostring()
     {
         /*
         Scanner input = new Scanner(System.in);
