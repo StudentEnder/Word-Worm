@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class WordWorm
@@ -182,15 +183,18 @@ public static class WordWorm
     // standard input: converts System.in input (file) to a string array, where each element is one line in the file.
     public static string[] inLinesTostring()
     {
+        /*
         Scanner input = new Scanner(System.in);
-        ArrayList<string> lines = new ArrayList<string>();
+        List<string> lines = new List<string>();
         while (input.hasNextLine())
         {
-            lines.add(input.nextLine());
+            lines.Add(input.nextLine());
         }
         input.close();
-        string[] linesArray = new string[lines.size()];
-        linesArray = lines.toArray(linesArray);
+        string[] linesArray = new string[lines.Capacity];
+        linesArray = lines.ToArray();
+        */
+        string[] linesArray = new string[0];
         return linesArray;
     }
 }
