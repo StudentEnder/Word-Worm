@@ -5,10 +5,11 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Word Map", menuName = "Word Map")]
 public class WordMapScriptableObject : ScriptableObject
 {
-    [TextArea] public char[,] map = new char[3, 3]
+    public int[] size = new int[2];
+    public char[][] map =
     {
-        {'a', 'b', 'c'},
-        {'d', 'e', 'f'},
-        {'g', 'h', 'i'}
+        new char[] {'A', 'B', 'C'},
+        new char[] {'D', 'E', 'F'},
+        new char[] {'G', 'H', 'I'}
     };
 }
