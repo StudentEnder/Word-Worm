@@ -1,8 +1,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class WordWorm
+public class WordWorm : MonoBehaviour
 {
+    //Unity Stuff
+    public WordMapScriptableObject map;
+    public GameObject grid;
+
+    public void NewWord(string word)
+    {
+        TestCase test = new TestCase(map.map, new string[] { word });
+        test.Solve();
+    }
 
     public class TestCase
     {
@@ -43,6 +52,9 @@ public static class WordWorm
                     {
                         if (wordMap[row][col] == firstLetter)
                         {
+                            //TODO
+                            // grid.transform.Find("("+col+","+row+")").GetComponent<Tile>().Redden();
+
                             //System.out.println("Started search for \"" + word + "\" at row:" + row + " col:" + col);
                             Search(word, wordBankIndex, row, col, 1);
                         }
@@ -55,7 +67,16 @@ public static class WordWorm
         private void Search(string word, int wordBankIndex, int row, int col, int letterIndex)
         {
             if (letterIndex >= word.Length) wordFound[wordBankIndex] = true; // the word is found when every letter has been reached
-            if (wordFound[wordBankIndex]) return; // if word is found, end the search for it. This is a separate if statement to check if other branches have completed the search
+            if (wordFound[wordBankIndex]) 
+            {
+                //TODO
+                /*
+                foreach (Transform tile in grid.transform)
+                {
+                    tile.GetComponent<Tile>().Found();
+                }*/
+                return; // if word is found, end the search for it. This is a separate if statement to check if other branches have completed the search
+            }
 
             char targetLetter = word[letterIndex];
 
