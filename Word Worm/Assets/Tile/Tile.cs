@@ -4,15 +4,28 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 
-public class TileModifier : MonoBehaviour
+public class Tile : MonoBehaviour
 {
-    public Vector2 coordinate;
-
     public GameObject tile;
+
+    public Transform background;
+
+    public Transform character;
+
+    public Vector2 coordinate;
 
     public Color color = new Color(1, 0, 0, 0);
 
-    public TextMeshProUGUI character;
+    public void Initialize(GameObject tile, char new_char, string col, string row)
+    {
+        tile.name = "("+col+","+row+")";
+        character =  tile.transform.Find("Character");
+        ChangeCharacter(new_char);
+    }
+    private void ChangeCharacter(char new_char)
+    {
+        character.GetComponent<TextMeshProUGUI>().text = new_char.ToString();
+    }
 
     private float HalfStep(float init)
     {
@@ -40,6 +53,6 @@ public class TileModifier : MonoBehaviour
 
     private void Update()
     {
-        tile.GetComponent<Image>().color = color;
+        background.GetComponent<Image>().color = color;
     }
 }
