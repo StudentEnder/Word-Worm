@@ -33,15 +33,17 @@ public class Tile : MonoBehaviour
         return init + step;
     }
 
-    public void Redden() // when the algorithm locates the next letter, it will redden that tile
+    public IEnumerator Redden() // when the algorithm locates the next letter, it will redden that tile
     {
         color.a = HalfStep(color.a);
+        yield return new WaitForSeconds(1f);
     }
 
-    public void Found() // when the algorithm finds the full word, all red tiles will turn green, showing the word path
+    public IEnumerator Found() // when the algorithm finds the full word, all red tiles will turn green, showing the word path
     {
         color.g = color.r;
         color.r = 0;
+        yield return new WaitForSeconds(1f);
     }
 
     public void NewWord() // when the algorithm starts on a new word, all colors are reset
