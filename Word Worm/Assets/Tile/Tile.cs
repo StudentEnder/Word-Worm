@@ -16,9 +16,9 @@ public class Tile : MonoBehaviour
 
     public Color color = new Color(1, 0, 0, 0);
 
-    public void Initialize(GameObject tile, char new_char, string col, string row)
+    public void Initialize(GameObject tile, char new_char, string row, string col)
     {
-        tile.name = "("+col+","+row+")";
+        tile.name = "("+row+","+col+")";
         character =  tile.transform.Find("Character");
         ChangeCharacter(new_char);
     }

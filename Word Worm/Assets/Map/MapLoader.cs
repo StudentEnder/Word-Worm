@@ -25,7 +25,7 @@ public class MapLoader : MonoBehaviour
             for (int j = 0; j < cols; j++)
             {
                 GameObject tile = Instantiate(tilePrefab, grid.transform);
-                tile.GetComponent<Tile>().Initialize(tile, map.map[i][j], j.ToString(), i.ToString());
+                tile.GetComponent<Tile>().Initialize(tile, map.wordMap[i][j], i.ToString(), j.ToString());
             }
 
         }
