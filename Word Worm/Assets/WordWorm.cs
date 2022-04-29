@@ -1,26 +1,35 @@
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WordWorm : MonoBehaviour
 {
     //Unity Stuff
+    public GameObject wordSearch;
     public WordMapScriptableObject map;
     public GameObject grid;
 
-    public void NewWord(string word)
+    public void NewWord()
     {
-        TestCase test = new TestCase(map.map, new string[] { word });
+        string word = wordSearch.GetComponent<TMP_InputField>().text;
+        Debug.Log("begin search of " + word + "!");
+        //string word = wordSearch.text;
+        TestCase test = new TestCase(this, map.wordMap, new string[] { word.ToUpper() });
         test.Solve();
     }
 
     public class TestCase
     {
+        //Unity Stuff
+        public WordWorm wordWorm;
+
         public char[][] wordMap; // map of letters, to find words in
         public string[] wordBank; // bank of words to Search for
         public bool[] wordFound; // whether or not word at the same index in wordBank is found. bool list must be in the same order as wordBank list
 
-        public TestCase(char[][] wordMap, string[] wordBank)
+        public TestCase(WordWorm wordWorm, char[][] wordMap, string[] wordBank)
         {
+            this.wordWorm = wordWorm;
             this.wordMap = wordMap;
             this.wordBank = wordBank;
 
@@ -53,8 +62,7 @@ public class WordWorm : MonoBehaviour
                         if (wordMap[row][col] == firstLetter)
                         {
                             //TODO
-                            // grid.transform.Find("("+col+","+row+")").GetComponent<Tile>().Redden();
-
+                            wordWorm.StartCoroutine(wordWorm.grid.transform.Find("("+row+","+col+")").GetComponent<Tile>().Redden());
                             //System.out.println("Started search for \"" + word + "\" at row:" + row + " col:" + col);
                             Search(word, wordBankIndex, row, col, 1);
                         }
@@ -70,11 +78,11 @@ public class WordWorm : MonoBehaviour
             if (wordFound[wordBankIndex]) 
             {
                 //TODO
-                /*
-                foreach (Transform tile in grid.transform)
+                foreach (Transform tile in wordWorm.grid.transform)
                 {
-                    tile.GetComponent<Tile>().Found();
-                }*/
+                    wordWorm.StartCoroutine(tile.GetComponent<Tile>().Found());
+                }
+                Debug.Log("Word Found!");
                 return; // if word is found, end the search for it. This is a separate if statement to check if other branches have completed the search
             }
 
