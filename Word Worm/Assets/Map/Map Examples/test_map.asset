@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6857947b54d3e04c80e180077891350, type: 3}
   m_Name: test_map
   m_EditorClassIdentifier: 
-  size: 0300000003000000
+  dimensions: 0800000008000000

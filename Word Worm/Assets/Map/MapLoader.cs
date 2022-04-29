@@ -13,11 +13,16 @@ public class MapLoader : MonoBehaviour
     {
         ClearBoard();
 
-        grid.GetComponent<GridLayoutGroup>().constraintCount = map.size[0];
+        int rows = map.dimensions[0];
+        int cols = map.dimensions[1];
 
-        for (int i = 0; i < map.size[0]; i++)
+        map.GenerateWordMap(map.dimensions);
+
+        grid.GetComponent<GridLayoutGroup>().constraintCount = cols;
+
+        for (int i = 0; i < rows; i++)
         {
-            for (int j = 0; j < map.size[1]; j++)
+            for (int j = 0; j < cols; j++)
             {
                 GameObject tile = Instantiate(tilePrefab, grid.transform);
                 tile.GetComponent<Tile>().Initialize(tile, map.map[i][j], j.ToString(), i.ToString());
