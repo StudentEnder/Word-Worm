@@ -190,8 +190,10 @@ public class WordWorm : MonoBehaviour
                 wordBank[i] = inputLines[lineNumber];
             }
 
+            WordWorm wordWorm = new WordWorm();
+
             // create and store the TestCase
-            cases[caseNumber] = new TestCase(wordMap, wordBank);
+            cases[caseNumber] = new TestCase(wordWorm, wordMap, wordBank);
         }
 
         return cases;
