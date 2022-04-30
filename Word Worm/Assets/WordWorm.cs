@@ -83,7 +83,7 @@ public class WordWorm : MonoBehaviour
                             //<Unity>
                             wordPath[0] = new int[] { row, col };
 
-                            wordWorm.grid.transform.Find("(" + row + "," + col + ")").GetComponent<Tile>().Redden();
+                            wordWorm.map.GetTile(row, col).Redden();
                             Debug.Log(firstLetter + "(" + row + "," + col + ") " + "Redden");
                             //<\Unity>
 
@@ -103,8 +103,7 @@ public class WordWorm : MonoBehaviour
                 //<Unity>
                 foreach (int[] coord in wordPath)
                 {
-                    Transform tile = wordWorm.grid.transform.Find("(" + coord[0] + "," + coord[1] + ")");
-                    tile.GetComponent<Tile>().Found();
+                    wordWorm.map.GetTile(coord).Found();
                 }
                 Debug.Log("Word Found!");
                 wordMarked = true;
@@ -154,7 +153,7 @@ public class WordWorm : MonoBehaviour
                                     //<Unity>
                                     wordPath[letterIndex] = new int[] { targetRow, targetCol };
 
-                                    wordWorm.grid.transform.Find("(" + targetRow + "," + targetCol + ")").GetComponent<Tile>().Redden();
+                                    wordWorm.map.GetTile(row, col).GetComponent<Tile>().Redden();
                                     Debug.Log(targetLetter + "(" + targetRow + "," + targetCol + ") " + "Redden");
                                     //<\Unity>
 
@@ -171,8 +170,7 @@ public class WordWorm : MonoBehaviour
 
             //<Unity>
             // reset colors
-            Transform tile = wordWorm.grid.transform.Find("(" + row + "," + col + ")");
-            tile.GetComponent<Tile>().ResetColor();
+            wordWorm.map.GetTile(row, col).ResetColor();
             Debug.Log("@163 resetting coloring (" + row + "," + col + ")");
             //<\Unity>
         }

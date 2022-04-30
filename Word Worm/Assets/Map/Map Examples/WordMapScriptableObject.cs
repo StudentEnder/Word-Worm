@@ -9,6 +9,8 @@ public class WordMapScriptableObject : ScriptableObject
 
     public int[] dimensions = new int[2] {8,8};
     public char[][] wordMap;
+    [SerializeField]
+    public Transform grid;
 
     private char RandomCharacter(System.Random rand)
     {
@@ -36,5 +38,15 @@ public class WordMapScriptableObject : ScriptableObject
         }
 
         wordMap = map;
+    }
+
+    public Tile GetTile(int row, int col)
+    {
+        return grid.transform.Find("(" + row + "," + col + ")").GetComponent<Tile>();
+    }
+
+    public Tile GetTile(int[] coord)
+    {
+        return GetTile(coord[0], coord[1]);
     }
 }
