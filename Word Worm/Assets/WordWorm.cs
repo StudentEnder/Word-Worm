@@ -65,7 +65,7 @@ public class WordWorm : MonoBehaviour
 
 
                 //<Unity>
-                    // reset colors
+                // reset colors
                 Debug.Log(wordPath.GetLength(0));
                 foreach (Tile tile in wordWorm.grid.transform)
                 {
@@ -81,7 +81,7 @@ public class WordWorm : MonoBehaviour
                         if (wordMap[row][col] == firstLetter)
                         {
                             //<Unity>
-                            wordPath[0] = new int[] {row, col};
+                            wordPath[0] = new int[] { row, col };
 
                             wordWorm.grid.transform.Find("(" + row + "," + col + ")").GetComponent<Tile>().Redden();
                             Debug.Log(firstLetter + "(" + row + "," + col + ") " + "Redden");
@@ -98,7 +98,7 @@ public class WordWorm : MonoBehaviour
         private void Search(string word, int wordBankIndex, int row, int col, int letterIndex, int[][] wordPath)
         {
             if (letterIndex >= word.Length) wordFound[wordBankIndex] = true; // the word is found when every letter has been reached
-            if (wordFound[wordBankIndex] && !wordMarked) 
+            if (wordFound[wordBankIndex] && !wordMarked)
             {
                 //<Unity>
                 foreach (int[] coord in wordPath)
