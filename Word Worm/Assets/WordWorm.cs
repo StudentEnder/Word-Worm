@@ -108,8 +108,9 @@ public class WordWorm : MonoBehaviour
                 }
                 Debug.Log("Word Found!");
                 wordMarked = true;
-                return; // if word is found, end the search for it. This is a separate if statement to check if other branches have completed the search
                 //<\Unity>
+
+                return; // if word is found, end the search for it. This is a separate if statement to check if other branches have completed the search
             }
 
             char targetLetter = word[letterIndex];
