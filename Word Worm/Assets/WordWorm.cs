@@ -67,7 +67,7 @@ public class WordWorm : MonoBehaviour
                 Debug.Log(wordPath.GetLength(0));
                 foreach (Transform tile in wordWorm.map.gameObject.transform)
                 {
-                    tile.GetComponent<Tile>().ResetColor();
+                    tile.GetComponent<Tile>().MarkResetSearch();
                 }
                 Debug.Log("new word");
                 //<\Unity>
@@ -81,7 +81,7 @@ public class WordWorm : MonoBehaviour
                             //<Unity>
                             wordPath[0] = new int[] { row, col };
 
-                            wordWorm.map.GetTile(row, col).Redden();
+                            wordWorm.map.GetTile(row, col).MarkSearching();
                             Debug.Log(firstLetter + "(" + row + "," + col + ") " + "Redden");
                             //<\Unity>
 
@@ -101,7 +101,7 @@ public class WordWorm : MonoBehaviour
                 //<Unity>
                 foreach (int[] coord in wordPath)
                 {
-                    wordWorm.map.GetTile(coord).Found();
+                    wordWorm.map.GetTile(coord).MarkFound();
                 }
                 Debug.Log("Word Found!");
                 wordMarked = true;
@@ -151,7 +151,7 @@ public class WordWorm : MonoBehaviour
                                     //<Unity>
                                     wordPath[letterIndex] = new int[] { targetRow, targetCol };
 
-                                    wordWorm.map.GetTile(row, col).Redden();
+                                    wordWorm.map.GetTile(row, col).MarkSearching();
                                     Debug.Log(targetLetter + "(" + targetRow + "," + targetCol + ") " + "Redden");
                                     //<\Unity>
 
@@ -168,7 +168,7 @@ public class WordWorm : MonoBehaviour
 
             //<Unity>
             // reset colors
-            wordWorm.map.GetTile(row, col).ResetColor();
+            wordWorm.map.GetTile(row, col).MarkResetSearch();
             Debug.Log("@163 resetting coloring (" + row + "," + col + ")");
             //<\Unity>
         }

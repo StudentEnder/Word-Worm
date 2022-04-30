@@ -33,19 +33,31 @@ public class Tile : MonoBehaviour
         return inititalAlpha + step;
     }
 
-    public void Redden() // when the algorithm locates the next letter, it will redden that tile
+    /// <summary>
+    /// Called when the tile is in progres of being searched.
+    /// </summary>
+    public void MarkSearching() 
     {
+        // when the algorithm locates the next letter, it will redden that tile
         color.a = HalfStep(color.a);
     }
 
-    public void Found() // when the algorithm finds the full word, all red tiles will turn green, showing the word path
+    /// <summary>
+    /// Called when the tile is part of a found word.
+    /// </summary>
+    public void MarkFound() 
     {
+        // when the algorithm finds the full word, all red tiles will turn green, showing the word path
         color.g = 1;
         color.r = 0;
     }
 
-    public void ResetColor() // when the algorithm starts on a new word, all colors are reset
+    /// <summary>
+    /// Called to reset the tile's state, like before all searches or after a failed search branch.
+    /// </summary>
+    public void MarkResetSearch() 
     {
+        // when the algorithm starts on a new word, all colors are reset
         color.r = 1;
         color.g = 0;
         color.a = 0;
