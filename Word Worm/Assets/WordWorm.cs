@@ -151,7 +151,7 @@ public class WordWorm : MonoBehaviour
                                     //<Unity>
                                     wordPath[letterIndex] = new int[] { targetRow, targetCol };
 
-                                    wordWorm.map.GetTile(row, col).GetComponent<Tile>().Redden();
+                                    wordWorm.map.GetTile(row, col).Redden();
                                     Debug.Log(targetLetter + "(" + targetRow + "," + targetCol + ") " + "Redden");
                                     //<\Unity>
 
