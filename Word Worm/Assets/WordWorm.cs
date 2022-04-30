@@ -171,12 +171,9 @@ public class WordWorm : MonoBehaviour
 
             //<Unity>
                 // reset colors
-                foreach (int[] coord in wordPath)
-                {
-                    Transform tile = wordWorm.grid.transform.Find("(" + coord[0] + "," + coord[1] + ")");
-                    tile.GetComponent<Tile>().NewWord();
-                }
-                Debug.Log("@163 resetting map coloring");
+                Transform tile = wordWorm.grid.transform.Find("(" + row + "," + col + ")");
+                tile.GetComponent<Tile>().ResetColor();
+                Debug.Log("@163 resetting coloring (" + row + "," + col + ")");
             //<\Unity>
         }
 
