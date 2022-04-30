@@ -15,6 +15,8 @@ public class WordWorm : MonoBehaviour
         string word = wordSearch.GetComponent<TMP_InputField>().text;
         Debug.Log("begin search of " + word + "!");
         //string word = wordSearch.text;
+        if (word.Length == 0) { return; }
+
         TestCase test = new TestCase(this, map.wordMap, new string[] { word.ToUpper() });
         test.Solve();
     }
