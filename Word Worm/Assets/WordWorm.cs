@@ -154,8 +154,8 @@ public class WordWorm : MonoBehaviour
                                     //<Unity>
                                     wordPath[letterIndex] = new int[] { targetRow, targetCol };
 
-                                        wordWorm.grid.transform.Find("(" + targetRow + "," + targetCol + ")").GetComponent<Tile>().Redden();
-                                        Debug.Log(targetLetter + "(" + targetRow + "," + targetCol + ") " + "Redden");
+                                    wordWorm.grid.transform.Find("(" + targetRow + "," + targetCol + ")").GetComponent<Tile>().Redden();
+                                    Debug.Log(targetLetter + "(" + targetRow + "," + targetCol + ") " + "Redden");
                                     //<\Unity>
 
                                     Search(word, wordBankIndex, targetRow, targetCol, letterIndex + 1, wordPath); // continue search
