@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using TMPro;
 
@@ -11,6 +11,7 @@ public class WordWorm : MonoBehaviour
 
     public void NewWord()
     {
+
         string word = wordSearch.GetComponent<TMP_InputField>().text;
         Debug.Log("begin search of " + word + "!");
         //string word = wordSearch.text;
@@ -144,16 +145,18 @@ public class WordWorm : MonoBehaviour
             }
         }
     }
-
+    
     public static void Main(string[] args)
     {
+        WordWorm wordWorm = new WordWorm();
+
         string[] lines = InLinesTostring(); // take standard input
 
         TestCase[] testCases = GetTestCases(lines); // parse the input
 
         foreach (TestCase testCase in testCases)
         {
-            testCase.Solve(); // solve the test case
+            wordWorm.StartCoroutine(testCase.Solve()); // solve the test case
             testCase.PrintResult(); // display the results
         }
     }
@@ -224,8 +227,8 @@ public class WordWorm : MonoBehaviour
         input.close();
         string[] linesArray = new string[lines.Capacity];
         linesArray = lines.ToArray();
-        */
+        /
         string[] linesArray = new string[0];
         return linesArray;
-    }
+    */}
 }
