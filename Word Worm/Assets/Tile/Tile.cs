@@ -27,10 +27,10 @@ public class Tile : MonoBehaviour
         character.GetComponent<TextMeshProUGUI>().text = new_char.ToString();
     }
 
-    private float HalfStep(float init)
+    private float HalfStep(float inititalAlpha)
     {
-        float step = (1 - init) / 2;
-        return init + step;
+        float step = (1 - inititalAlpha) / 2;
+        return inititalAlpha + step;
     }
 
     public void Redden() // when the algorithm locates the next letter, it will redden that tile
@@ -44,7 +44,7 @@ public class Tile : MonoBehaviour
         color.r = 0;
     }
 
-    public void NewWord() // when the algorithm starts on a new word, all colors are reset
+    public void ResetColor() // when the algorithm starts on a new word, all colors are reset
     {
         color.r = 1;
         color.g = 0;
