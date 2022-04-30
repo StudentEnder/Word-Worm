@@ -27,6 +27,7 @@ public class WordWorm : MonoBehaviour
         public char[][] wordMap; // map of letters, to find words in
         public string[] wordBank; // bank of words to Search for
         public bool[] wordFound; // whether or not word at the same index in wordBank is found. bool list must be in the same order as wordBank list
+        public bool wordMarked;
 
         public TestCase(WordWorm wordWorm, char[][] wordMap, string[] wordBank)
         {
@@ -40,6 +41,8 @@ public class WordWorm : MonoBehaviour
             {
                 wordFound[i] = false;
             }
+
+            wordMarked = false;
         }
 
         // sets wordFound bool list to the solved answer
@@ -60,7 +63,7 @@ public class WordWorm : MonoBehaviour
                 {
                     for (int col = 0; col < wordMap[0].Length; col++)
                     {
-                        if (wordMap[row][col] == firstLetter)
+                        if (wordMap[row][col] == firstLetter && !wordFound[wordBankIndex])
                         {
                             //TODO
                             wordWorm.StartCoroutine(wordWorm.grid.transform.Find("("+row+","+col+")").GetComponent<Tile>().Redden());
@@ -76,7 +79,7 @@ public class WordWorm : MonoBehaviour
         private void Search(string word, int wordBankIndex, int row, int col, int letterIndex)
         {
             if (letterIndex >= word.Length) wordFound[wordBankIndex] = true; // the word is found when every letter has been reached
-            if (wordFound[wordBankIndex]) 
+            if (wordFound[wordBankIndex] && !wordMarked) 
             {
                 //TODO
                 foreach (Transform tile in wordWorm.grid.transform)
@@ -84,6 +87,7 @@ public class WordWorm : MonoBehaviour
                     wordWorm.StartCoroutine(tile.GetComponent<Tile>().Found());
                 }
                 Debug.Log("Word Found!");
+                wordMarked = true;
                 return; // if word is found, end the search for it. This is a separate if statement to check if other branches have completed the search
             }
 
