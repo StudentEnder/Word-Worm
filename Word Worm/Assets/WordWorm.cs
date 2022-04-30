@@ -63,24 +63,22 @@ public class WordWorm : MonoBehaviour
                 char firstLetter = word[0];
                 int[][] wordPath = new int[word.Length][];
 
+
                 //<Unity>
-                if (!wordFound[wordBankIndex])
-                {
                     // reset colors
-                    foreach (int[] coord in wordPath)
-                    {
-                        Transform tile = wordWorm.grid.transform.Find("(" + coord[0] + "," + coord[1] + ")");
-                        tile.GetComponent<Tile>().NewWord();
-                    }
-                    Debug.Log("@62 new word");
+                Debug.Log(wordPath.GetLength(0));
+                foreach (Tile tile in wordWorm.grid.transform)
+                {
+                    tile.GetComponent<Tile>().ResetColor();
                 }
+                Debug.Log("new word");
                 //<\Unity>
 
                 for (int row = 0; row < wordMap.Length; row++)
                 {
                     for (int col = 0; col < wordMap[0].Length; col++)
                     {
-                        if (wordMap[row][col] == firstLetter && !wordFound[wordBankIndex])
+                        if (wordMap[row][col] == firstLetter)
                         {
                             //<Unity>
                             wordPath[0] = new int[] {row, col};
@@ -153,13 +151,10 @@ public class WordWorm : MonoBehaviour
                                 { // if letter matches target 
 
                                     //<Unity>
-                                    if (!wordFound[wordBankIndex])
-                                    {
-                                        wordPath[letterIndex] = new int[] { targetRow, targetCol };
+                                    wordPath[letterIndex] = new int[] { targetRow, targetCol };
 
                                         wordWorm.grid.transform.Find("(" + targetRow + "," + targetCol + ")").GetComponent<Tile>().Redden();
                                         Debug.Log(targetLetter + "(" + targetRow + "," + targetCol + ") " + "Redden");
-                                    }
                                     //<\Unity>
 
                                     Search(word, wordBankIndex, targetRow, targetCol, letterIndex + 1, wordPath); // continue search
@@ -174,8 +169,6 @@ public class WordWorm : MonoBehaviour
             // no word found by this branch if code reached here
 
             //<Unity>
-            if (!wordFound[wordBankIndex])
-            {
                 // reset colors
                 foreach (int[] coord in wordPath)
                 {
@@ -183,7 +176,6 @@ public class WordWorm : MonoBehaviour
                     tile.GetComponent<Tile>().NewWord();
                 }
                 Debug.Log("@163 resetting map coloring");
-            }
             //<\Unity>
         }
 
