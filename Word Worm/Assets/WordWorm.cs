@@ -170,10 +170,10 @@ public class WordWorm : MonoBehaviour
             // no word found by this branch if code reached here
 
             //<Unity>
-                // reset colors
-                Transform tile = wordWorm.grid.transform.Find("(" + row + "," + col + ")");
-                tile.GetComponent<Tile>().ResetColor();
-                Debug.Log("@163 resetting coloring (" + row + "," + col + ")");
+            // reset colors
+            Transform tile = wordWorm.grid.transform.Find("(" + row + "," + col + ")");
+            tile.GetComponent<Tile>().ResetColor();
+            Debug.Log("@163 resetting coloring (" + row + "," + col + ")");
             //<\Unity>
         }
 
