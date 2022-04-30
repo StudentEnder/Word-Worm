@@ -5,19 +5,17 @@ using TMPro;
 public class WordWorm : MonoBehaviour
 {
     //Unity Stuff
-    public GameObject wordSearch;
-    public WordMapScriptableObject map;
-    public GameObject grid;
+    public MapLoader map;
 
     public void NewWord()
     {
 
-        string word = wordSearch.GetComponent<TMP_InputField>().text;
+        string word = transform.GetComponent<TMP_InputField>().text;
         Debug.Log("begin search of " + word + "!");
         //string word = wordSearch.text;
         if (word.Length == 0) { return; }
 
-        TestCase test = new TestCase(this, map.wordMap, new string[] { word.ToUpper() });
+        TestCase test = new TestCase(this, map.WordMap, new string[] { word.ToUpper() });
         test.Solve();
     }
 
@@ -67,7 +65,7 @@ public class WordWorm : MonoBehaviour
                 //<Unity>
                 // reset colors
                 Debug.Log(wordPath.GetLength(0));
-                foreach (Tile tile in wordWorm.grid.transform)
+                foreach (Transform tile in wordWorm.map.gameObject.transform)
                 {
                     tile.GetComponent<Tile>().ResetColor();
                 }

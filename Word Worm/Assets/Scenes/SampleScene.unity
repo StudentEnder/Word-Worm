@@ -175,9 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 88b923b256556a54e9090a7edf402567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wordSearch: {fileID: 245413750}
-  map: {fileID: 11400000, guid: 5a43980ddbe933545a495d52b79f4f01, type: 2}
-  grid: {fileID: 596574972}
+  map: {fileID: 596574975}
 --- !u!114 &245413753
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,7 +710,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1680909fe7ad13846868177197d95a19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grid: {fileID: 596574972}
   map: {fileID: 11400000, guid: 5a43980ddbe933545a495d52b79f4f01, type: 2}
   tilePrefab: {fileID: 6094806387548577282, guid: 8db6ef51a1c3a2243add07833bc8344e, type: 3}
 --- !u!1 &953735450

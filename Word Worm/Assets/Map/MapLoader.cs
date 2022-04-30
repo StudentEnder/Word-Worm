@@ -5,9 +5,10 @@ using UnityEngine.UI;
 
 public class MapLoader : MonoBehaviour
 {
-    public GameObject grid;
     public WordMapScriptableObject map;
     public GameObject tilePrefab;
+
+    public char[][] WordMap { get; private set; }
 
     public void SpawnMap()
     {
@@ -17,14 +18,15 @@ public class MapLoader : MonoBehaviour
         int cols = map.dimensions[1];
 
         map.GenerateWordMap();
+        WordMap = map.wordMap;
 
-        grid.GetComponent<GridLayoutGroup>().constraintCount = cols;
+        gameObject.GetComponent<GridLayoutGroup>().constraintCount = cols;
 
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < cols; j++)
             {
-                GameObject tile = Instantiate(tilePrefab, grid.transform);
+                GameObject tile = Instantiate(tilePrefab, transform);
                 tile.GetComponent<Tile>().Initialize(tile, map.wordMap[i][j], i.ToString(), j.ToString());
             }
 
@@ -37,5 +39,15 @@ public class MapLoader : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+    }
+
+    public Tile GetTile(int row, int col)
+    {
+        return transform.Find("(" + row + "," + col + ")").GetComponent<Tile>();
+    }
+
+    public Tile GetTile(int[] coord)
+    {
+        return GetTile(coord[0], coord[1]);
     }
 }

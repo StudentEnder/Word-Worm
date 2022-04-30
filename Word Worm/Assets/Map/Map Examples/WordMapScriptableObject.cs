@@ -39,14 +39,4 @@ public class WordMapScriptableObject : ScriptableObject
 
         wordMap = map;
     }
-
-    public Tile GetTile(int row, int col)
-    {
-        return grid.transform.Find("(" + row + "," + col + ")").GetComponent<Tile>();
-    }
-
-    public Tile GetTile(int[] coord)
-    {
-        return GetTile(coord[0], coord[1]);
-    }
 }
