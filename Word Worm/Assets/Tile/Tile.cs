@@ -40,7 +40,7 @@ public class Tile : MonoBehaviour
 
     public void Found() // when the algorithm finds the full word, all red tiles will turn green, showing the word path
     {
-        color.g = color.r;
+        color.g = 1;
         color.r = 0;
     }
 
