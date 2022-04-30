@@ -10,14 +10,14 @@ public class WordMapScriptableObject : ScriptableObject
     public int[] dimensions = new int[2] {8,8};
     public char[][] wordMap;
 
-    private char GetChar(System.Random rand)
+    private char RandomCharacter(System.Random rand)
     {
         string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         int num = rand.Next(0, chars.Length);
         return chars[num];
     }
 
-    public void GenerateWordMap(int[] dimensions)
+    public void GenerateWordMap()
     {
         int rows = dimensions[0];
         int cols = dimensions[1];
@@ -30,7 +30,7 @@ public class WordMapScriptableObject : ScriptableObject
 
             for (int j = 0; j < cols; j++)
             {
-                row[j] = GetChar(rand);
+                row[j] = RandomCharacter(rand);
             }
             map[i] = row;
         }

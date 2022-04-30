@@ -16,7 +16,7 @@ public class MapLoader : MonoBehaviour
         int rows = map.dimensions[0];
         int cols = map.dimensions[1];
 
-        map.GenerateWordMap(map.dimensions);
+        map.GenerateWordMap();
 
         grid.GetComponent<GridLayoutGroup>().constraintCount = cols;
 
