@@ -50,4 +50,12 @@ public class MapLoader : MonoBehaviour
     {
         return GetTile(coord[0], coord[1]);
     }
+
+    public void ResetTiles()
+    {
+        foreach (Transform child in transform)
+        {
+            child.GetComponent<Tile>().MarkResetSearch();
+        }
+    }
 }

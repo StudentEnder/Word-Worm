@@ -64,11 +64,7 @@ public class WordWorm : MonoBehaviour
 
                 //<Unity>
                 // reset colors
-                Debug.Log(wordPath.GetLength(0));
-                foreach (Transform tile in wordWorm.map.gameObject.transform)
-                {
-                    tile.GetComponent<Tile>().MarkResetSearch();
-                }
+                wordWorm.map.ResetTiles();
                 Debug.Log("new word");
                 //<\Unity>
 
