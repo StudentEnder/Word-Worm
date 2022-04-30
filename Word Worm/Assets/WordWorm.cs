@@ -59,16 +59,35 @@ public class WordWorm : MonoBehaviour
             {
                 string word = wordBank[wordBankIndex];
                 char firstLetter = word[0];
+                int[][] wordPath = new int[word.Length][];
+
+                //<Unity>
+                if (!wordFound[wordBankIndex])
+                {
+                    // reset colors
+                    foreach (int[] coord in wordPath)
+                    {
+                        Transform tile = wordWorm.grid.transform.Find("(" + coord[0] + "," + coord[1] + ")");
+                        tile.GetComponent<Tile>().NewWord();
+                    }
+                    Debug.Log("@62 new word");
+                }
+                //<\Unity>
+
                 for (int row = 0; row < wordMap.Length; row++)
                 {
                     for (int col = 0; col < wordMap[0].Length; col++)
                     {
                         if (wordMap[row][col] == firstLetter && !wordFound[wordBankIndex])
                         {
-                            //TODO
-                            wordWorm.StartCoroutine(wordWorm.grid.transform.Find("("+row+","+col+")").GetComponent<Tile>().Redden());
-                            //System.out.println("Started search for \"" + word + "\" at row:" + row + " col:" + col);
-                            Search(word, wordBankIndex, row, col, 1);
+                            //<Unity>
+                            wordPath[0] = new int[] {row, col};
+
+                            wordWorm.grid.transform.Find("(" + row + "," + col + ")").GetComponent<Tile>().Redden();
+                            Debug.Log(firstLetter + "(" + row + "," + col + ") " + "Redden");
+                            //<\Unity>
+
+                            Search(word, wordBankIndex, row, col, 1, wordPath);
                         }
                     }
                 }
@@ -76,19 +95,21 @@ public class WordWorm : MonoBehaviour
         }
 
         // recursive search
-        private void Search(string word, int wordBankIndex, int row, int col, int letterIndex)
+        private void Search(string word, int wordBankIndex, int row, int col, int letterIndex, int[][] wordPath)
         {
             if (letterIndex >= word.Length) wordFound[wordBankIndex] = true; // the word is found when every letter has been reached
             if (wordFound[wordBankIndex] && !wordMarked) 
             {
-                //TODO
-                foreach (Transform tile in wordWorm.grid.transform)
+                //<Unity>
+                foreach (int[] coord in wordPath)
                 {
-                    wordWorm.StartCoroutine(tile.GetComponent<Tile>().Found());
+                    Transform tile = wordWorm.grid.transform.Find("(" + coord[0] + "," + coord[1] + ")");
+                    tile.GetComponent<Tile>().Found();
                 }
                 Debug.Log("Word Found!");
                 wordMarked = true;
                 return; // if word is found, end the search for it. This is a separate if statement to check if other branches have completed the search
+                //<\Unity>
             }
 
             char targetLetter = word[letterIndex];
@@ -128,7 +149,18 @@ public class WordWorm : MonoBehaviour
                             { // if cols in domain
                                 if (wordMap[targetRow][targetCol] == targetLetter)
                                 { // if letter matches target 
-                                    Search(word, wordBankIndex, targetRow, targetCol, letterIndex + 1); // continue search
+
+                                    //<Unity>
+                                    if (!wordFound[wordBankIndex])
+                                    {
+                                        wordPath[letterIndex] = new int[] { targetRow, targetCol };
+
+                                        wordWorm.grid.transform.Find("(" + targetRow + "," + targetCol + ")").GetComponent<Tile>().Redden();
+                                        Debug.Log(targetLetter + "(" + targetRow + "," + targetCol + ") " + "Redden");
+                                    }
+                                    //<\Unity>
+
+                                    Search(word, wordBankIndex, targetRow, targetCol, letterIndex + 1, wordPath); // continue search
                                 }
                             }
                         }
@@ -138,8 +170,22 @@ public class WordWorm : MonoBehaviour
             }
             //System.out.println("Search died\tat row:" + row + " col:" + col);
             // no word found by this branch if code reached here
+
+            //<Unity>
+            if (!wordFound[wordBankIndex])
+            {
+                // reset colors
+                foreach (int[] coord in wordPath)
+                {
+                    Transform tile = wordWorm.grid.transform.Find("(" + coord[0] + "," + coord[1] + ")");
+                    tile.GetComponent<Tile>().NewWord();
+                }
+                Debug.Log("@163 resetting map coloring");
+            }
+            //<\Unity>
         }
 
+    /*
         // must first run solve() to get and store the result.
         public void PrintResult()
         {
