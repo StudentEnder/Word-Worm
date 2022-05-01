@@ -3,8 +3,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Word Map", menuName = "Word Map")]
 public class WordMapScriptableObject : ScriptableObject
 {
-    public Transform grid;
-
     private readonly System.Random rand = new System.Random();
 
     public int[] dimensions = new int[2] {8,8};
