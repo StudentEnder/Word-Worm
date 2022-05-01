@@ -74,19 +74,31 @@ public class WordWorm : MonoBehaviour
                     //<Unity>
                     wordPath[0] = new int[] { row, col };
 
-                    map.GetTile(row, col).MarkSearching();
-                    Debug.Log(firstLetter + "(" + row + "," + col + ") " + "Redden");
+                    //map.GetTile(row, col).MarkSearching();
+                    //Debug.Log(firstLetter + "(" + row + "," + col + ") " + "Redden");
                     //<\Unity>
 
-                    Search(word, false, row, col, 1, wordPath);
+                    StartCoroutine(Search(word, false, row, col, 1, wordPath));
                 }
             }
         }
     }
 
     // recursive search
-    private void Search(string word, bool wordFound, int row, int col, int letterIndex, int[][] wordPath)
+    private IEnumerator Search(string word, bool wordFound, int row, int col, int letterIndex, int[][] wordPath)
     {
+        Debug.Log("Search Coroutine Started");
+
+        Tile currentTile = map.GetTile(row, col);
+        currentTile.MarkSearching();
+
+        Debug.Log("Waiting...");
+        yield return new WaitForSeconds(1);
+        Debug.Log("Resuming.");
+
+
+        //Debug.Log(targetLetter + "(" + targetRow + "," + targetCol + ") " + "Redden");
+
         if (letterIndex >= word.Length) wordFound = true; // the word is found when every letter has been reached
         if (wordFound)
         {
@@ -98,9 +110,8 @@ public class WordWorm : MonoBehaviour
             Debug.Log($"Word \"{word}\" Found!");
             //<\Unity>
 
-            return; // if word is found, end the search for it. This is a separate if statement to check if other branches have completed the search
+            yield break; // if word is found, end the search for it. This is a separate if statement to check if other branches have completed the search
         }
-
         char targetLetter = word[letterIndex];
 
         //System.out.println("Search spawned\tat row:" + row + " col:" + col);
@@ -122,6 +133,8 @@ public class WordWorm : MonoBehaviour
         // 0 <= col + j < wordMap[0].Length
 
 
+        // search surrounding tiles.
+
         for (int i = -1; i <= 1; i++)
         { // loop surrounding rows (inclusive)
             int targetRow = row + i;
@@ -142,11 +155,9 @@ public class WordWorm : MonoBehaviour
                                 //<Unity>
                                 wordPath[letterIndex] = new int[] { targetRow, targetCol };
 
-                                map.GetTile(row, col).MarkSearching();
-                                Debug.Log(targetLetter + "(" + targetRow + "," + targetCol + ") " + "Redden");
                                 //<\Unity>
 
-                                Search(word, wordFound, targetRow, targetCol, letterIndex + 1, wordPath); // continue search
+                                StartCoroutine(Search(word, wordFound, targetRow, targetCol, letterIndex + 1, wordPath)); // continue search
                             }
                         }
                     }
@@ -158,8 +169,7 @@ public class WordWorm : MonoBehaviour
 
         //<Unity>
         // reset colors
-        map.GetTile(row, col).MarkResetSearch();
-        Debug.Log("@163 resetting coloring (" + row + "," + col + ")");
+        //Debug.Log("@163 resetting coloring (" + row + "," + col + ")");
         //<\Unity>
     }
 }
