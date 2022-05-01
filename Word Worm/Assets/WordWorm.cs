@@ -4,12 +4,12 @@ using TMPro;
 
 public class WordWorm : MonoBehaviour
 {
-    //Unity Stuff
+    // <Unity>
     public MapLoader map;
+    private TMP_InputField inputField;
+    // <\Unity>
 
     public char[][] wordMap; // map of letters, to find words in
-
-    private TMP_InputField inputField;
 
     private void Awake()
     {
@@ -59,11 +59,11 @@ public class WordWorm : MonoBehaviour
         int[][] wordPath = new int[word.Length][];
 
 
-        //<Unity>
+        // <Unity>
         // reset colors
         map.ResetTiles();
         Debug.Log("new word");
-        //<\Unity>
+        // <\Unity>
 
         for (int row = 0; row < wordMap.Length; row++)
         {
@@ -71,12 +71,12 @@ public class WordWorm : MonoBehaviour
             {
                 if (wordMap[row][col] == firstLetter)
                 {
-                    //<Unity>
+                    // <Unity>
                     wordPath[0] = new int[] { row, col };
 
                     //map.GetTile(row, col).MarkSearching();
                     //Debug.Log(firstLetter + "(" + row + "," + col + ") " + "Redden");
-                    //<\Unity>
+                    // <\Unity>
 
                     StartCoroutine(Search(word, false, row, col, 1, wordPath));
                 }
@@ -102,13 +102,13 @@ public class WordWorm : MonoBehaviour
         if (letterIndex >= word.Length) wordFound = true; // the word is found when every letter has been reached
         if (wordFound)
         {
-            //<Unity>
+            // <Unity>
             foreach (int[] coord in wordPath)
             {
                 map.GetTile(coord).MarkFound();
             }
             Debug.Log($"Word \"{word}\" Found!");
-            //<\Unity>
+            // <\Unity>
 
             yield break; // if word is found, end the search for it. This is a separate if statement to check if other branches have completed the search
         }
@@ -152,10 +152,10 @@ public class WordWorm : MonoBehaviour
                             if (wordMap[targetRow][targetCol] == targetLetter)
                             { // if letter matches target 
 
-                                //<Unity>
+                                // <Unity>
                                 wordPath[letterIndex] = new int[] { targetRow, targetCol };
 
-                                //<\Unity>
+                                // <\Unity>
 
                                 StartCoroutine(Search(word, wordFound, targetRow, targetCol, letterIndex + 1, wordPath)); // continue search
                             }
@@ -167,9 +167,9 @@ public class WordWorm : MonoBehaviour
         }
         // no word found by this branch if code reached here
 
-        //<Unity>
+        // <Unity>
         // reset colors
         //Debug.Log("@163 resetting coloring (" + row + "," + col + ")");
-        //<\Unity>
+        // <\Unity>
     }
 }
