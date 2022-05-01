@@ -56,7 +56,7 @@ public class WordWorm : MonoBehaviour
         //      keep wordFound = false for the found word if recursion doesn't reach the end of the word.
 
         char firstLetter = word[0];
-        int[][] wordPath = new int[word.Length][];
+        
 
 
         // <Unity>
@@ -72,6 +72,7 @@ public class WordWorm : MonoBehaviour
                 if (wordMap[row][col] == firstLetter)
                 {
                     // <Unity>
+                    int[][] wordPath = new int[word.Length][];
                     wordPath[0] = new int[] { row, col };
 
                     //map.GetTile(row, col).MarkSearching();
@@ -155,9 +156,10 @@ public class WordWorm : MonoBehaviour
                                 // <Unity>
                                 wordPath[letterIndex] = new int[] { targetRow, targetCol };
 
+                                int[][] wordPathCopy = (int[][])wordPath.Clone();
                                 // <\Unity>
 
-                                StartCoroutine(Search(word, wordFound, targetRow, targetCol, letterIndex + 1, wordPath)); // continue search
+                                StartCoroutine(Search(word, wordFound, targetRow, targetCol, letterIndex + 1, wordPathCopy)); // continue search
                             }
                         }
                     }
