@@ -1347,8 +1347,10 @@ MonoBehaviour:
     (or any string of characters) into the text prompt.
 
     Press enter, and watch
-    the algorithm find your word in the map!                       (words don''t
-    need to be in straight lines)'
+    the algorithm find your word in the map!
+
+    (words don''t need to be in straight
+    lines and there might be more than one solution)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1389,7 +1391,7 @@ MonoBehaviour:
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
-  m_paragraphSpacing: 300
+  m_paragraphSpacing: 250
   m_charWidthMaxAdj: 0
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
