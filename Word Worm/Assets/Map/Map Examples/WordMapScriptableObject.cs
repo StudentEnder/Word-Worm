@@ -7,7 +7,7 @@ public class WordMapScriptableObject : ScriptableObject
 {
     public Transform grid;
 
-    private System.Random rand = new System.Random();
+    private readonly System.Random rand = new System.Random();
 
     public int[] dimensions = new int[2] {8,8};
     public char[][] wordMap;
