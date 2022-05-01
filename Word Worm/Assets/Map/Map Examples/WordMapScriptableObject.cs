@@ -5,7 +5,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Word Map", menuName = "Word Map")]
 public class WordMapScriptableObject : ScriptableObject
 {
-    [SerializeField]
     public Transform grid;
 
     private System.Random rand = new System.Random();
