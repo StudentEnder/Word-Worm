@@ -50,6 +50,15 @@ public class Tile : MonoBehaviour
     }
 
     /// <summary>
+    /// Called when the search has continued elsewhere (adjacent or failed).
+    /// </summary>
+    public void MarkSearchTrail()
+    {
+        color.r = 0;
+        color.b = 1;
+    }
+
+    /// <summary>
     /// Called when the tile is part of a found word.
     /// </summary>
     public void MarkFound() 
