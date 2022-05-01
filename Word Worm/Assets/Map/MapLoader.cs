@@ -7,6 +7,7 @@ public class MapLoader : MonoBehaviour
 {
     public WordMapScriptableObject map;
     public GameObject tilePrefab;
+    public WordWorm wordWorm;
 
     public char[][] WordMap { get; private set; }
 
@@ -31,6 +32,8 @@ public class MapLoader : MonoBehaviour
             }
 
         }
+
+        wordWorm.NewMap(); // called to update wordMap reference there.
     }
 
     private void ClearBoard()
