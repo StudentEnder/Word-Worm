@@ -16,6 +16,13 @@ public class Tile : MonoBehaviour
 
     public Color color = new Color(1, 0, 0, 0);
 
+    private Image backgroundImage;
+
+    private void Awake()
+    {
+        backgroundImage = background.GetComponent<Image>();
+    }
+
     public void Initialize(GameObject tile, char new_char, string row, string col)
     {
         tile.name = "("+row+","+col+")";
@@ -65,6 +72,6 @@ public class Tile : MonoBehaviour
 
     private void Update()
     {
-        background.GetComponent<Image>().color = color;
+        backgroundImage.color = color;
     }
 }
