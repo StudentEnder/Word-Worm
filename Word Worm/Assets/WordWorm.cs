@@ -47,7 +47,7 @@ public class WordWorm : MonoBehaviour
     // sets wordFound bool list to the solved answer
     private void Solve(string word)
     {
-        // choose a word to search for (looping through map once PER word)      Note: searching for every word at once would not work (at least without an alphabetical search process on the bank itself), as words can have the same starting letters. Or the same 3 letters before a difference, etc.   
+        // choose a word to search for (looping through map once PER word) 
         //  loop through every cell
         //  start recursive search when first letter of word is found.
         //      follow recursion with continuing letters, spawning recursion at each up/down/left/right/DIAGONALLY with matching letter for the word.
@@ -74,9 +74,6 @@ public class WordWorm : MonoBehaviour
                     // <Unity>
                     int[][] wordPath = new int[word.Length][];
                     wordPath[0] = new int[] { row, col };
-
-                    //map.GetTile(row, col).MarkSearching();
-                    //Debug.Log(firstLetter + "(" + row + "," + col + ") " + "Redden");
                     // <\Unity>
 
                     StartCoroutine(Search(word, false, row, col, 1, wordPath));
@@ -98,24 +95,18 @@ public class WordWorm : MonoBehaviour
         Debug.Log("Resuming.");
 
 
-        //Debug.Log(targetLetter + "(" + targetRow + "," + targetCol + ") " + "Redden");
-
         if (letterIndex >= word.Length) wordFound = true; // the word is found when every letter has been reached
         if (wordFound)
         {
             // <Unity>
-            foreach (int[] coord in wordPath)
-            {
-                map.GetTile(coord).MarkFound();
-            }
+            foreach (int[] coord in wordPath) { map.GetTile(coord).MarkFound(); }
+
             Debug.Log($"Word \"{word}\" Found!");
             // <\Unity>
 
             yield break; // if word is found, end the search for it. This is a separate if statement to check if other branches have completed the search
         }
         char targetLetter = word[letterIndex];
-
-        //System.out.println("Search spawned\tat row:" + row + " col:" + col);
 
         // directions:
         // row - 1  & col       -> up
@@ -142,14 +133,18 @@ public class WordWorm : MonoBehaviour
 
             if (targetRow >= 0 && targetRow < wordMap.Length)
             { // if rows in domain
+
                 for (int j = -1; j <= 1; j++)
                 { // loop surrounding cols (inclusive)
+
                     if (!(i == 0 && j == 0))
                     { // if target is moved from current position
+
                         int targetCol = col + j;
 
                         if (targetCol >= 0 && targetCol < wordMap[0].Length)
                         { // if cols in domain
+
                             if (wordMap[targetRow][targetCol] == targetLetter)
                             { // if letter matches target 
 
@@ -168,10 +163,5 @@ public class WordWorm : MonoBehaviour
             }
         }
         // no word found by this branch if code reached here
-
-        // <Unity>
-        // reset colors
-        //Debug.Log("@163 resetting coloring (" + row + "," + col + ")");
-        // <\Unity>
     }
 }
